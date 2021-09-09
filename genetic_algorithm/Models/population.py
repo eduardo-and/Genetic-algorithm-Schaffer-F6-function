@@ -22,7 +22,7 @@ class Population:
         self.aptitude = aptitude
         
     def greater_aptitude(self):
-        return max(self.aptitude)
+        return round(max(self.aptitude),6)
     
     def greater_aptitude_chromosome(self):
         return self.chromosomes[self.aptitude.index(max(self.aptitude))]

@@ -19,15 +19,16 @@ def genetic_algorithm_algorithm(params):
     # Slide example
     random_chromosomes[0] = [0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0,
                        0, 0, 1, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1]
-    big = 0.0
-    index = 0
+    
+    max_aptitude = []
     # Instace of model Population
     current_population = Population(
         random_chromosomes, params["pop_size"], params["bits"],Aptitude(random_chromosomes,params["pop_size"],params["bits"]).calculate())
 
     for i in range(0, params["num_ger"]):
-        print("\nGeneration: "+ str(i) +"  Highest aptitude: " + str(current_population.greater_aptitude())," Aptitude Mean: "+str(float(current_population.sumOfAptitude()/params["pop_size"]))+"\n"+str(current_population.greater_aptitude_chromosome()))
+        # print("\nGeneration: "+ str(i) +"  Highest aptitude: " + str(current_population.greater_aptitude())," Aptitude Mean: "+str(float(current_population.sumOfAptitude()/params["pop_size"]))+"\n"+str(current_population.greater_aptitude_chromosome()))
         # check if you found the solution
+        max_aptitude.append(current_population.greater_aptitude())
         if(FindSolution(current_population).verify()):
             break
 
@@ -59,4 +60,4 @@ def genetic_algorithm_algorithm(params):
     
     
     #Return highest aptitude and average aptitude
-    return float(current_population.greater_aptitude()), str(i), str(current_population.greater_aptitude_chromosome())
+    return float(current_population.greater_aptitude()), str(i), str(current_population.greater_aptitude_chromosome()),max_aptitude
